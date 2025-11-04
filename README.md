@@ -1,15 +1,16 @@
-# Projekt 2: Editor
+# Project 2: Editor
 
-## Projektbeschreibung
-Eine einfache Textverarbeitung mit Ein- und Ausgabe über die Konsole. Die Anwendung ermöglicht das Verwalten von Textabsätzen mit verschiedenen Formatierungsoptionen.
+## Project Description
+A simple text-processing application with console-based input and output.  
+The program allows managing text paragraphs with various formatting options.
 
-## Teammitglieder
-- [Name 1] - ScrumMaster
-- [Name 2] - Product Owner
-- [Name 3] - Entwickler
-- [Name 4] - Entwickler
+## Team Members
+- **[rajkuthu]** – Scrum Master  
+- **[pannasan]** – Product Owner  
+- **[krishabi]** – Developer  
+- **[gunasja1]** – Developer  
 
-## Ordnerstruktur
+## Folder Structure
 ```
 P2_Editor/
 ├── README.md
@@ -20,12 +21,10 @@ P2_Editor/
 │   ├── formatter.py         # Text formatting
 │   └── index_creator.py     # Index functionality
 ├── tests/
-│   ├── test_paragraph.py
-│   ├── test_formatter.py
-│   └── test_index.py
+│   ├── testcases.md
+│   ├── test_concept.md
 └── docs/
     ├── sprint_protocols.md
-    ├── test_concept.md
     └── documentation.md
 ```
 
@@ -34,58 +33,59 @@ P2_Editor/
 python p2.py
 ```
 
-## Befehle
+## Commands
 
 ### ADD [n]
-Fügt einen neuen Absatz an Position n ein (optional, sonst am Ende)
-```
+Adds a new paragraph at position **n** (optional, otherwise at the end).  
+If the position already exists, the user can choose to **overwrite** or **shift down**.
+```bash
 ADD
 ADD 2
 ```
 
 ### DEL [n]
-Löscht den Absatz an Position n (optional, sonst letzter Absatz)
-```
+Deletes the paragraph at position **n** (optional, otherwise the last paragraph).
+```bash
 DEL
 DEL 3
 ```
 
 ### DUMMY [n]
-Fügt einen Blindtext an Position n ein
-```
+Inserts a dummy (placeholder) text at position **n** (optional, otherwise at the end).
+```bash
 DUMMY
 DUMMY 1
 ```
 
 ### EXIT
-Beendet das Programm
+Terminates the program.
 
 ### FORMAT RAW
-Setzt Ausgabeformat auf Rohformat mit Absatznummern
+Sets the output format to *RAW* (plain output) with paragraph numbers.
 
-**Beispiel:**
-```
+**Example:**
+```bash
 > FORMAT RAW
-Format auf RAW gesetzt.
+Format set to RAW.
 > PRINT
-<1>: Dies ist der erste Absatz
-<2>: Dies ist der zweite Absatz
-<3>: Dies ist der dritte Absatz
+<1>: This is the first paragraph
+<2>: This is the second paragraph
+<3>: This is the third paragraph
 ```
 
 ### FORMAT FIX <b>
-Setzt Ausgabeformat mit fester Spaltenbreite b
+Sets the output format to *FIXED COLUMN WIDTH* (width = b).
 
-**Umbruch-Regeln:**
-- Umbruch nur nach Leerzeichen
-- Leerzeichen nach dem umgebrochen wird zählt nicht zur Zeilenlänge
-- Wörter länger als Spaltenbreite werden getrennt
-- Keine Umbruchstelle innerhalb Spaltenbreite = Umbruch nach Spaltenbreite
+**Line Break Rules:**
+- Break only after spaces  
+- The space after a line break does not count toward line length  
+- Words longer than the column width are split  
+- If no space is found within the limit, break at the maximum width  
 
-**Beispiel mit FORMAT FIX 20:**
-```
+**Example with FORMAT FIX 20:**
+```bash
 > FORMAT FIX 20
-Format auf FIX mit Breite 20 gesetzt.
+Format set to FIX with width 20.
 > PRINT
 Virtute praecedunt,
 quod fere cotidianis
@@ -98,59 +98,52 @@ ionesimmensoslongusw
 s.
 ```
 
-**Weitere Beispiele:**
-```
-FORMAT FIX 30
-FORMAT FIX 50
-FORMAT FIX 80
-```
-
 ### INDEX
-Gibt Index aller Begriffe aus, die öfter als 3x vorkommen
-```
+Outputs all terms that appear more than three times and begin with a capital letter.
+```bash
 INDEX
 ```
 
 ### PRINT
-Gibt Text im aktuellen Format aus
-```
+Displays the text using the currently selected format.
+```bash
 PRINT
 ```
 
 ### REPLACE [n]
-Ersetzt Text im Absatz n
-```
+Replaces text in paragraph **n** (optional, otherwise the last paragraph).
+```bash
 REPLACE
 REPLACE 2
 ```
 
 ## Functionality Components
 
-### 1. Paragraph Management (paragraph_manager.py)
-- Store and manage paragraphs
-- Add, delete and retrieve paragraphs
-- Input validation
+### 1. Paragraph Management (`paragraph_manager.py`)
+- Store and manage paragraphs  
+- Add, delete, and retrieve paragraphs  
+- Validate and clean input  
 
-### 2. Command Parser (command_parser.py)
-- Parse user input
-- Command recognition and error handling
-- Parameter extraction
+### 2. Command Parser (`command_parser.py`)
+- Parse user input  
+- Recognize commands and handle errors  
+- Extract command parameters  
 
-### 3. Formatter (formatter.py)
-- RAW format: Output with paragraph numbers
-- FIX format: Output with fixed column width
-- Text wrapping according to rules
+### 3. Formatter (`formatter.py`)
+- RAW format: display with paragraph numbers  
+- FIX format: display with fixed column width  
+- Implement text wrapping rules  
 
-### 4. Index Creator (index_creator.py)
-- Create word directory
-- Count terms (capital letters)
-- Output of occurrences
+### 4. Index Creator (`index_creator.py`)
+- Generate a word index  
+- Count occurrences (case-sensitive for capitalized words)  
+- Display terms appearing more than three times  
 
 ## Testing
-Tests are located in the `tests/` folder:
-- Unit tests for individual modules
-- Integration tests for command execution
-- Test cases for formatting
+All tests are located in the `tests/` folder:
+- Unit tests for individual modules  
+- Integration tests for command execution  
+- Formatting test cases  
 
 Run all tests:
 ```bash
@@ -158,30 +151,20 @@ python -m pytest tests/
 ```
 
 ## Clean Code Principles
-- Functions are short and fulfill only one task
-- Descriptive variable and function names
-- No code duplication
-- Consistent abstraction levels
-- Comprehensive docstrings
+- Each function performs one specific task  
+- Clear and descriptive names for variables and functions  
+- No code duplication  
+- Consistent abstraction levels  
+- Detailed docstrings  
+- Use of control flags in main loop  
 
 ## Documentation
-See `docs/` folder for:
-- Sprint protocols
-- Test concept
-- Detailed documentation
-
-## Used Constructs
-- Only PROG1 and PROG2 modules
-- No external libraries
-- Standard Python functionality
+See the `docs/` folder for:
+- Sprint protocols  
+- Detailed project documentation  
 
 ## Git Workflow
-- Regular commits with meaningful messages
-- Feature branches for new functions
-- Code reviews before merge
-- All team members contribute code
-
-## Known Limitations
-- No file input/output
-- Console-based interaction only
-- Input validation restricted to defined characters
+- Frequent commits with meaningful messages  
+- Feature branches for new functions  
+- Code reviews before merging  
+- Equal contribution from all team members  
